@@ -1,25 +1,14 @@
 package easy387
 
 func firstUniqChar(s string) int {
-	strs := []byte(s)
-	m := make(map[byte]int)
-	for i, b := range strs {
-		_, ok := m[b]
-		if ok {
-			m[b] = -1
-			continue
-		}
-		m[b] = i
+	runeToCnt := make(map[rune]int)
+	for _, v := range s {
+		runeToCnt[v]++
 	}
-	min := len(s)
-	for _, v := range m {
-		if v != -1 && min > v {
-			min = v
+	for i, v := range s {
+		if runeToCnt[v] == 1 {
+			return i
 		}
 	}
-
-	if min == len(s) {
-		return -1
-	}
-	return min
+	return -1
 }
