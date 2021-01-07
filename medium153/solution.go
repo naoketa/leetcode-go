@@ -1,13 +1,16 @@
 package medium153
 
-import "math"
-
 func findMin(nums []int) int {
-	min := math.MaxInt64
-	for _, v := range nums {
-		if min > v {
-			min = v
+	start := 0
+	end := len(nums) - 1
+
+	for start < end {
+		mid := (start + end) / 2
+		if nums[end] < nums[mid] {
+			start = mid + 1
+		} else {
+			end = mid
 		}
 	}
-	return min
+	return nums[start]
 }
