@@ -19,19 +19,18 @@ func zigzagLevelOrder(root *TreeNode) [][]int {
 		row := []int{}
 		for range make([]int, size) {
 			curret := q.dequeue()
-			row = append(row, curret.Val)
+			if len(ans)%2 == 1 {
+				row = append([]int{curret.Val}, row...)
+			} else {
+				row = append(row, curret.Val)
+			}
+
 			if curret.Left != nil {
 				q.enqueue(curret.Left)
 
 			}
 			if curret.Right != nil {
 				q.enqueue(curret.Right)
-			}
-		}
-		aSize := len(ans)
-		if aSize%2 == 1 {
-			for i, j := 0, len(row)-1; i < j; i, j = i+1, j-1 {
-				row[i], row[j] = row[j], row[i]
 			}
 		}
 		ans = append(ans, row)
