@@ -1,7 +1,6 @@
 package easy543
 
 import (
-	"fmt"
 	"math"
 )
 
@@ -23,8 +22,6 @@ func diameterOfBinaryTree(root *TreeNode) int {
 		}
 		left := search(root.Left)
 		right := search(root.Right)
-		fmt.Printf("left:%d\n", left)
-		fmt.Printf("right:%d\n", right)
 		ans = max(ans, (left + right + 1))
 		return max(left, right) + 1
 	}
