@@ -1,18 +1,16 @@
 package medium560
 
 func subarraySum(nums []int, k int) int {
-	var ans int
-	for i := 0; i < len(nums); i++ {
-		sum := nums[i]
-		if sum == k {
-			ans++
+	preSum := make(map[int]int)
+	preSum[0] = 1
+
+	sum, ans := 0, 0
+	for _, v := range nums {
+		sum += v
+		if ps, ok := preSum[sum-k]; ok {
+			ans += ps
 		}
-		for j := i + 1; j < len(nums); j++ {
-			sum += nums[j]
-			if sum == k {
-				ans++
-			}
-		}
+		preSum[sum]++
 	}
 	return ans
 }
